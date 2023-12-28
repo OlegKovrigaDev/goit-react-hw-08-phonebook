@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteContact, editContatc } from '../../redux/operations';
-import { Modal, Input, Button, message, Popconfirm } from 'antd';
+import { Modal, Input, Button, message, Popconfirm, Card } from 'antd';
+
+const { Meta } = Card;
 
 function ContactItem({ contact }) {
   const dispatch = useDispatch();
@@ -11,11 +13,11 @@ function ContactItem({ contact }) {
   const [newName, setNewName] = useState(contact.name);
   const [newNumber, setNewNumber] = useState(contact.number);
 
-  const confirm = e => {
-    handleDelete(e.target.value);
-    message.success('Click on Yes');
+  const confirm = () => {
+    handleDelete();
+    message.success('Contact deleted');
   };
-  const cancel = e => message.error('Click on No');
+  const cancel = () => message.error('Canceled');
 
   const handleDelete = () => dispatch(deleteContact(contact.id));
 
@@ -33,10 +35,20 @@ function ContactItem({ contact }) {
   const handleNumberChange = e => setNewNumber(e.target.value);
 
   return (
-    <li>
-      <span>{contact.name}</span>
-      <a href={`tel:${contact.number}`}>{contact.number}</a>
-      <button onClick={handleEdit}>Edit</button>
+    <Card
+      title={contact.name}
+      extra={
+        <Button type="primary" onClick={handleEdit}>
+          Edit
+        </Button>
+      }
+      style={{ width: 300, marginBottom: 16 }}
+    >
+      <Meta
+        title="Contact Number"
+        description={<a href={`tel:${contact.number}`}>{contact.number}</a>}
+        style={{ marginBottom: 12, fontSize: 24 }}
+      />
 
       <Popconfirm
         title="Delete the contact"
@@ -46,17 +58,17 @@ function ContactItem({ contact }) {
         okText="Yes"
         cancelText="No"
       >
-        <button danger>Add</button>
+        <Button danger>Delete</Button>
       </Popconfirm>
 
       <Modal
-        open={showModal}
+        visible={showModal}
         onCancel={handleCancel}
         footer={[
           <Button key="cancel" onClick={handleCancel}>
             Cancel
           </Button>,
-          <Button key="save" onClick={handleSave}>
+          <Button key="save" type="primary" onClick={handleSave}>
             Save
           </Button>,
         ]}
@@ -82,9 +94,10 @@ function ContactItem({ contact }) {
           />
         </div>
       </Modal>
-    </li>
+    </Card>
   );
 }
+
 ContactItem.propTypes = {
   contact: PropTypes.object.isRequired,
 };

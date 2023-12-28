@@ -2,12 +2,14 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
-import AppBar from './AppBar/AppBar';
+import Navigation from './Navigation/Navigation';
 
 export const Layout = () => {
   return (
     <>
-      <AppBar />
+      <header>
+        <Navigation />
+      </header>
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>

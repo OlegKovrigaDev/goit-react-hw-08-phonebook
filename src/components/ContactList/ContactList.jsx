@@ -1,15 +1,16 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Empty, Alert } from 'antd';
 import {
   selectFilteredContacts,
   selectError,
   selectIsLoading,
 } from '../../redux/selectors';
 import { fetchContacts } from '../../redux/operations';
-import { Loader } from '../Loader/Loader';
 import ContactItem from 'components/ContactItem/ContactItem';
+import { Loader } from 'components/Loader/Loader';
 
-export default function ContactList() {
+const ContactList = () => {
   const filteredContacts = useSelector(selectFilteredContacts);
   const error = useSelector(selectError);
   const isLoading = useSelector(selectIsLoading);
@@ -21,16 +22,24 @@ export default function ContactList() {
   }, [dispatch]);
 
   return (
-    <ul>
-      {isLoading && !error ? (
-        <Loader />
-      ) : filteredContacts.length === 0 && !error ? (
-        <p>The Phonebook is empty. Add your first contact.</p>
-      ) : (
-        filteredContacts.map(({ id, name, number }) => (
-          <ContactItem key={id} contact={{ id, name, number }} />
-        ))
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: 12,
+      }}
+    >
+      {filteredContacts.map(({ id, name, number }) => (
+        <ContactItem key={id} contact={{ id, name, number }} />
+      ))}
+      {isLoading && !error && <Loader size="large" />}
+      {error && <Alert message="Error fetching contacts" type="error" />}
+      {!isLoading && filteredContacts.length === 0 && (
+        <Empty description="The Phonebook is empty. Add your first contact." />
       )}
-    </ul>
+    </div>
   );
-}
+};
+
+export default ContactList;
