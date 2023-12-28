@@ -4,12 +4,11 @@ import { addContact } from '../../redux/operations';
 import Notiflix from 'notiflix';
 import { selectContacts } from '../../redux/selectors';
 
-export const ContactForm = () => {
+const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -86,3 +85,5 @@ export const ContactForm = () => {
     </form>
   );
 };
+
+export default ContactForm;
