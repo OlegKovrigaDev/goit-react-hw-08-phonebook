@@ -1,6 +1,7 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import LoginForm from '../components/LoginForm/LoginForm';
+import { Container } from './Container.styled';
 
 export default function Login() {
   return (
@@ -9,7 +10,9 @@ export default function Login() {
         <Helmet>
           <title>Login</title>
         </Helmet>
-        <LoginForm />
+        <Container>
+          <LoginForm />
+        </Container>
       </div>
     </HelmetProvider>
   );

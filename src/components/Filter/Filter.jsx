@@ -20,6 +20,7 @@ const Filter = () => {
           type="text"
           name="filter"
           placeholder="Search by name"
+          size="large"
           value={filter}
           onChange={handleFilterChange}
           disabled={useSelector(selectContacts).length === 0}

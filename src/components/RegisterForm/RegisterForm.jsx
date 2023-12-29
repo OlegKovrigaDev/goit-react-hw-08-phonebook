@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-
 import { register } from '../../redux/auth/auth-operations';
 import { Button, Form, Input } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons'; // Import Ant Design icons
 
 const RegisterForm = () => {
   const [form] = Form.useForm();
@@ -38,6 +38,7 @@ const RegisterForm = () => {
       },
     },
   };
+
   return (
     <Form
       {...formItemLayout}
@@ -56,7 +57,6 @@ const RegisterForm = () => {
     >
       <Form.Item
         name="email"
-        label="E-mail"
         rules={[
           {
             type: 'email',
@@ -68,12 +68,11 @@ const RegisterForm = () => {
           },
         ]}
       >
-        <Input />
+        <Input placeholder="Email" prefix={<UserOutlined />} size="large" />
       </Form.Item>
 
       <Form.Item
         name="password"
-        label="Password"
         rules={[
           {
             required: true,
@@ -82,12 +81,15 @@ const RegisterForm = () => {
         ]}
         hasFeedback
       >
-        <Input.Password />
+        <Input.Password
+          placeholder="Password"
+          prefix={<LockOutlined />}
+          size="large"
+        />
       </Form.Item>
 
       <Form.Item
         name="confirm"
-        label="Confirm Password"
         dependencies={['password']}
         hasFeedback
         rules={[
@@ -101,18 +103,21 @@ const RegisterForm = () => {
                 return Promise.resolve();
               }
               return Promise.reject(
-                new Error('The new password that you entered do not match!')
+                new Error('The new password that you entered does not match!')
               );
             },
           }),
         ]}
       >
-        <Input.Password />
+        <Input.Password
+          placeholder="Confirm Password"
+          prefix={<LockOutlined />}
+          size="large"
+        />
       </Form.Item>
 
       <Form.Item
         name="name"
-        label="Name"
         tooltip="What do you want others to call you?"
         rules={[
           {
@@ -122,10 +127,11 @@ const RegisterForm = () => {
           },
         ]}
       >
-        <Input />
+        <Input placeholder="Name" prefix={<UserOutlined />} size="large" />
       </Form.Item>
+
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button block size="large" type="primary" htmlType="submit">
           Register
         </Button>
       </Form.Item>

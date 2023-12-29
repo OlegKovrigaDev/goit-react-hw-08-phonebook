@@ -30,18 +30,17 @@ const Navigation = () => {
             <NavLink to="/contacts">Phonebook</NavLink>
           </Menu.Item>
         )}
-
-        {!isLoggedIn && (
-          <>
-            <Menu.Item key="registration">
-              <NavLink to="/registration">Registration</NavLink>
-            </Menu.Item>
-            <Menu.Item key="login">
-              <NavLink to="/login">Login</NavLink>
-            </Menu.Item>
-          </>
-        )}
       </div>
+      {!isLoggedIn && (
+        <>
+          <Menu.Item key="registration">
+            <NavLink to="/registration">Registration</NavLink>
+          </Menu.Item>
+          <Menu.Item key="login">
+            <NavLink to="/login">Login</NavLink>
+          </Menu.Item>
+        </>
+      )}
       {isLoggedIn && (
         <Menu.Item>
           <UserMenu />

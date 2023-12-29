@@ -13,15 +13,15 @@ const LoginForm = () => {
 
   return (
     <Form
-      name='normal_login'
-      className='login-form'
+      name="normal_login"
+      className="login-form"
       initialValues={{
         remember: false,
       }}
       onFinish={onFinish}
     >
       <Form.Item
-        name='email'
+        name="email"
         rules={[
           {
             required: true,
@@ -30,12 +30,13 @@ const LoginForm = () => {
         ]}
       >
         <Input
-          prefix={<UserOutlined className='site-form-item-icon' />}
-          placeholder='Email'
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Email"
+          size="large"
         />
       </Form.Item>
       <Form.Item
-        name='password'
+        name="password"
         rules={[
           {
             required: true,
@@ -44,19 +45,26 @@ const LoginForm = () => {
         ]}
       >
         <Input
-          prefix={<LockOutlined className='site-form-item-icon' />}
-          type='password'
-          placeholder='Password'
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+          size="large"
         />
       </Form.Item>
       <Form.Item>
-        <Form.Item name='remember' valuePropName='checked' noStyle>
+        <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
       </Form.Item>
 
       <Form.Item>
-        <Button type='primary' htmlType='submit' className='login-form-button'>
+        <Button
+          block
+          size="large"
+          type="primary"
+          htmlType="submit"
+          className="login-form-button"
+        >
           Log in
         </Button>
       </Form.Item>

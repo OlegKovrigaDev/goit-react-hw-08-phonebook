@@ -1,6 +1,7 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import RegisterForm from '../components/RegisterForm/RegisterForm';
+import { Container } from './Container.styled';
 
 export default function Register() {
   return (
@@ -9,7 +10,9 @@ export default function Register() {
         <Helmet>
           <title>Registration</title>
         </Helmet>
-        <RegisterForm />
+        <Container>
+          <RegisterForm />
+        </Container>
       </div>
     </HelmetProvider>
   );
